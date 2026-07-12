@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FYS Bakery Conquest - Simulador de Vendas</title>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- HEADER / NAVBAR -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="brand-fys">FYS</span>
+                <span class="brand-title">Bakery Conquest</span>
+            </div>
+            <div class="stats-area">
+                <div class="stat-badge" id="xp-display">
+                    <span class="icon">✨</span>
+                    <span class="value">0 XP</span>
+                </div>
+                <div class="stat-badge" id="badges-count">
+                    <span class="icon">🏆</span>
+                    <span class="value">0 Conquistas</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="app-main">
+            
+            <!-- TELA 1: WELCOME SCREEN -->
+            <section id="screen-welcome" class="screen active">
+                <div class="welcome-card">
+                    <div class="fys-glow-logo">FYS</div>
+                    <h1>Conquiste as Padarias do Brasil!</h1>
+                    <p class="subtitle">O canal de padarias possui mais de 80.000 pontos de venda. Enquanto a maioria dos vendedores foca apenas em bares, você foi escalado para abrir este oceano azul para <strong>FYS</strong>.</p>
+                    
+                    <div class="game-intro-cards">
+                        <div class="intro-card">
+                            <span class="card-icon">🎯</span>
+                            <h3>Vença Objeções</h3>
+                            <p>Enfrente comerciantes duros que só querem vender o líder de mercado.</p>
+                        </div>
+                        <div class="intro-card">
+                            <span class="card-icon">⚡</span>
+                            <h3>Use Argumentos FYS</h3>
+                            <p>Sabor com 30% menos açúcar, qualidade do grupo Heineken e margem imbatível.</p>
+                        </div>
+                        <div class="intro-card">
+                            <span class="card-icon">🥇</span>
+                            <h3>Ganhe Prêmios</h3>
+                            <p>Mostre que você é o melhor conquistador de pontos de venda e desbloqueie medalhas.</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="btn-start-game">Iniciar Treinamento</button>
+                </div>
+            </section>
+
+            <!-- TELA 2: LEVEL SELECT SCREEN -->
+            <section id="screen-levels" class="screen">
+                <div class="section-title">
+                    <h2>Escolha sua Rota de Vendas</h2>
+                    <p>Cada padaria tem um dono com perfil e resistência diferentes. Escolha por onde começar!</p>
+                </div>
+
+                <div class="levels-grid">
+                    <!-- LEVEL 1 -->
+                    <div class="level-card" data-level="1">
+                        <div class="level-badge">Nível 1</div>
+                        <div class="char-avatar avatar-manoel">👴</div>
+                        <h3>Padaria do Seu Manoel</h3>
+                        <p class="level-type">Padaria de Bairro Tradicional</p>
+                        <p class="level-desc">Seu Manoel é conservador, só vende a marca líder ("Coca/Guaraná") e reclama que não tem espaço na geladeira.</p>
+                        <div class="level-difficulty">
+                            <span>Dificuldade:</span>
+                            <span class="diff-stars text-easy">⭐ Fácil</span>
+                        </div>
+                        <button class="btn btn-secondary btn-play-level" data-level="1">Visitar Padaria</button>
+                    </div>
+
+                    <!-- LEVEL 2 -->
+                    <div class="level-card" data-level="2">
+                        <div class="level-badge">Nível 2</div>
+                        <div class="char-avatar avatar-neuza">👩‍💼</div>
+                        <h3>Panificadora Gourmet Neuza</h3>
+                        <p class="level-type">Padaria Gourmet e Confeitaria</p>
+                        <p class="level-desc">Dona Neuza é focada em finanças e público saudável. Ela acha refrigerante ultrapassado e quer margem alta.</p>
+                        <div class="level-difficulty">
+                            <span>Dificuldade:</span>
+                            <span class="diff-stars text-medium">⭐⭐ Média</span>
+                        </div>
+                        <button class="btn btn-secondary btn-play-level" data-level="2">Visitar Padaria</button>
+                    </div>
+
+                    <!-- LEVEL 3 (LOCKED) -->
+                    <div class="level-card locked">
+                        <div class="level-badge">Nível 3</div>
+                        <div class="char-avatar">🏢</div>
+                        <h3>Rede de Padarias Pão de Ouro</h3>
+                        <p class="level-type">Grandes Contas (Key Accounts)</p>
+                        <p class="level-desc">Uma rede de 5 lojas. O comprador corporativo exige dados consolidados de giro de produto e ações de marketing em PDV.</p>
+                        <div class="level-difficulty">
+                            <span>Dificuldade:</span>
+                            <span class="diff-stars text-hard">⭐⭐⭐ Difícil</span>
+                        </div>
+                        <div class="lock-indicator">🔒 Vencer Nível 1 & 2 para Desbloquear</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline" id="btn-back-welcome">Voltar para o Menu</button>
+            </section>
+
+            <!-- TELA 3: GAMEPLAY SCREEN -->
+            <section id="screen-gameplay" class="screen">
+                <div class="gameplay-layout">
+                    <!-- PAINEL DO CLIENTE (ESQUERDA) -->
+                    <div class="client-panel card-glass">
+                        <div class="client-header">
+                            <div class="client-avatar" id="game-client-avatar">👴</div>
+                            <div>
+                                <h3 id="game-client-name">Seu Manoel</h3>
+                                <p class="client-sub" id="game-client-type">Padaria do Bairro</p>
+                            </div>
+                        </div>
+
+                        <div class="metrics-container">
+                            <div class="metric-row">
+                                <div class="metric-label">
+                                    <span>Humor do Cliente</span>
+                                    <span class="metric-val" id="mood-val">80%</span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-fill fill-mood" id="mood-bar" style="width: 80%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="metric-row">
+                                <div class="metric-label">
+                                    <span>Interesse de Compra</span>
+                                    <span class="metric-val" id="closing-val">0%</span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-fill fill-closing" id="closing-bar" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="client-card-info">
+                            <h4>Dica do Copiloto:</h4>
+                            <p id="copilot-tip">Lembre-se: Use argumentos baseados na qualidade e origem de FYS para quebrar as defesas iniciais.</p>
+                        </div>
+                    </div>
+
+                    <!-- CHAT E ARGUMENTOS (DIREITA) -->
+                    <div class="chat-panel card-glass">
+                        <div class="chat-history" id="chat-history">
+                            <!-- Mensagens serão injetadas via JS -->
+                        </div>
+
+                        <div class="choices-panel">
+                            <h4>Escolha seu Argumento de Vendas:</h4>
+                            <div class="choices-list" id="choices-container">
+                                <!-- Opções serão injetadas via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TELA 4: RESULT SCREEN -->
+            <section id="screen-result" class="screen">
+                <div class="result-card card-glass">
+                    <div class="result-icon" id="result-icon">🎉</div>
+                    <h2 id="result-title">Venda Fechada!</h2>
+                    <p id="result-message">Você convenceu o Seu Manoel a colocar FYS na geladeira!</p>
+
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <span class="lbl">XP Ganho</span>
+                            <span class="val text-highlight" id="result-xp">+150 XP</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="lbl">Sabor da Vitória</span>
+                            <span class="val text-fys" id="result-performance">Excelente!</span>
+                        </div>
+                    </div>
+
+                    <div class="badge-unlocked-card" id="badge-unlocked-section">
+                        <div class="badge-icon">🎖️</div>
+                        <div>
+                            <h4>Conquista Desbloqueada!</h4>
+                            <h3 id="unlocked-badge-name">Dono da Geladeira</h3>
+                            <p id="unlocked-badge-desc">Convenceu o Seu Manoel a dar espaço para FYS no balcão principal.</p>
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button class="btn btn-primary" id="btn-next-step">Ver Outras Rota</button>
+                        <button class="btn btn-outline" id="btn-restart">Recomeçar Tudo</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>FYS Bakery Conquest - Criado para o Desafio de Projeto Final da DIO</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
