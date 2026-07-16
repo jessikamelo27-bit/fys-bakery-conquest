@@ -14,14 +14,18 @@ Acesse a versão online e jogue diretamente no seu navegador clicando no botão 
 
 ## 📷 Screenshots & GIFs
 
-> [!NOTE]
-> *Salve as capturas de tela e GIFs da sua aplicação rodando dentro das subpastas em `/assets` para que elas carreguem aqui!*
+> [!TIP]
+> Confira abaixo a galeria de capturas de tela do simulador real em funcionamento:
 
-| 📷 Tela Inicial | 📷 Gameplay |
+| 📷 Tela Inicial (Menu) | 📷 Múltiplos Perfis |
 | :---: | :---: |
-| ![Tela Inicial](assets/img/screenshot-home.png) | ![Gameplay](assets/img/screenshot-gameplay.png) |
-| **📷 Vitória** | **📷 GIF de Demonstração** |
-| ![Vitória](assets/img/screenshot-victory.png) | ![GIF Demo](assets/gif/demo.gif) |
+| ![Tela Inicial](assets/img/screenshot-home.png) | ![Múltiplos Perfis](assets/img/screenshot-profiles.png) |
+| **📷 Rotas de Venda** | **📷 Conquistas do Vendedor** |
+| ![Rotas de Venda](assets/img/screenshot-routes-top.png) | ![Conquistas](assets/img/screenshot-routes-bottom.png) |
+| **📷 Batalha de Negociação** | **📷 Vitória e Premiação** |
+| ![Gameplay](assets/img/screenshot-gameplay.png) | ![Vitória](assets/img/screenshot-victory-top.png) |
+| **📷 Estatísticas da Partida** | **📷 GIF Demonstrativo (Placeholder)** |
+| ![Estatísticas](assets/img/screenshot-victory-bottom.png) | ![GIF Demo](assets/gif/demo.gif) |
 
 ---
 
