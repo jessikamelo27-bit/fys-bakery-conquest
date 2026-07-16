@@ -1,7 +1,7 @@
 /* UI.JS - FYS BAKERY CONQUEST */
-/* Controla a renderização visual da interface, atualizações de DOM e animações */
+/* Controla a renderização visual da interface, atualizações de DOM, perfis, conquistas e estatísticas */
 
-// 1. MAPEAMENTO DE SELETORES DO DOM
+// 1. MAPAS DE ELEMENTOS E SELETORES DO DOM
 const uiElements = {
     // Telas do App
     screens: {
@@ -17,6 +17,18 @@ const uiElements = {
     // Níveis e Grid
     levelCards: document.querySelectorAll('.level-card'),
     
+    // Controles no cabeçalho
+    btnToggleMute: document.getElementById('btn-toggle-mute'),
+    btnToggleTheme: document.getElementById('btn-toggle-theme'),
+    
+    // Perfis
+    profilesListContainer: document.getElementById('profiles-list-container'),
+    newProfileNameInput: document.getElementById('new-profile-name'),
+    btnCreateProfile: document.getElementById('btn-create-profile'),
+
+    // Painel de Conquistas (Níveis)
+    achievementsContainer: document.getElementById('achievements-container'),
+
     // Gameplay (Cliente)
     gameClientAvatar: document.getElementById('game-client-avatar'),
     gameClientName: document.getElementById('game-client-name'),
@@ -42,8 +54,21 @@ const uiElements = {
     badgeUnlockedSection: document.getElementById('badge-unlocked-section'),
     unlockedBadgeName: document.getElementById('unlocked-badge-name'),
     unlockedBadgeDesc: document.getElementById('unlocked-badge-desc'),
-    btnNextStep: document.getElementById('btn-next-step')
+    btnNextStep: document.getElementById('btn-next-step'),
+    
+    // Tabela de Estatísticas da Partida
+    statTotalTurns: document.getElementById('stat-total-turns'),
+    statStrongPct: document.getElementById('stat-strong-pct'),
+    statFinalMood: document.getElementById('stat-final-mood'),
+    statPersuasion: document.getElementById('stat-persuasion')
 };
+
+// Conquistas pré-definidas para renderização na lista
+const ALL_SYSTEM_ACHIEVEMENTS = [
+    { key: 'dono_da_geladeira', name: "Dono da Geladeira", desc: "Abriu espaço na geladeira do Seu Manoel.", icon: "🧊" },
+    { key: 'conquistador_gourmet', name: "Conquistador Gourmet", desc: "Convenceu a Dona Neuza em sua confeitaria.", icon: "🍰" },
+    { key: 'mestre_vendas', name: "Mestre Supremo de Vendas FYS", desc: "Alcançou o nível corporativo com a Rede Pão de Ouro.", icon: "👑" }
+];
 
 // 2. FUNÇÕES DE NAVEGAÇÃO DE TELA
 function showScreen(screenId) {
@@ -59,7 +84,55 @@ function showScreen(screenId) {
     }, 450);
 }
 
-// 3. ATUALIZAÇÕES DOS STATUS E GRID
+// 3. RENDERIZADORES DE PERFIS DE JOGADORES
+function renderPlayerProfiles() {
+    const profiles = getAllProfiles();
+    const activeName = getActiveProfileName();
+    
+    uiElements.profilesListContainer.innerHTML = "";
+    
+    profiles.forEach(p => {
+        const card = document.createElement('div');
+        card.className = `profile-card ${p.name === activeName ? 'active' : ''}`;
+        card.innerHTML = `👤 ${p.name} <span style="font-size:0.75rem;opacity:0.8;">(${p.xp} XP)</span>`;
+        card.addEventListener('click', () => {
+            setActiveProfileName(p.name);
+            // Recarrega o estado de jogo do novo perfil selecionado
+            gameState = loadGameState();
+            updateHeaderStats();
+            updateLevelGrid();
+            renderPlayerProfiles();
+            // Toca áudio de feedback
+            playAudioSuccess();
+        });
+        uiElements.profilesListContainer.appendChild(card);
+    });
+}
+
+// 4. RENDERIZADOR DE CONQUISTAS (ROTA SELECT)
+function renderAchievementsGallery() {
+    uiElements.achievementsContainer.innerHTML = "";
+    
+    ALL_SYSTEM_ACHIEVEMENTS.forEach(ach => {
+        const item = document.createElement('div');
+        const isUnlocked = gameState.unlockedBadges.includes(ach.key);
+        
+        item.className = `achievement-item ${isUnlocked ? '' : 'locked'}`;
+        item.innerHTML = `
+            <div class="ach-icon">${ach.icon}</div>
+            <div class="ach-info">
+                <h4>${ach.name}</h4>
+                <p>${ach.desc}</p>
+                <span style="font-size:0.7rem; font-weight:700; color:${isUnlocked ? 'var(--heineken-neon)' : 'var(--text-muted)'}">
+                    ${isUnlocked ? '🔓 Desbloqueado' : '🔒 Bloqueado'}
+                </span>
+            </div>
+        `;
+        uiElements.achievementsContainer.appendChild(item);
+    });
+}
+
+// 5. ATUALIZAÇÕES DOS STATUS E GRID
 function updateHeaderStats() {
     uiElements.xpDisplay.querySelector('.value').innerText = `${gameState.xp} XP`;
     uiElements.badgesCount.querySelector('.value').innerText = `${gameState.unlockedBadges.length} Conquistas`;
@@ -72,7 +145,6 @@ function updateLevelGrid() {
 
         const playBtn = card.querySelector('.btn-play-level');
 
-        // Estiliza de acordo com o estado de conclusão
         if (gameState.levelsCompleted.includes(levelId)) {
             card.style.borderColor = 'var(--heineken-neon)';
             if(playBtn) {
@@ -105,9 +177,12 @@ function updateLevelGrid() {
             level3Card.appendChild(btn);
         }
     }
+    
+    // Atualiza a galeria de conquistas interativa
+    renderAchievementsGallery();
 }
 
-// 4. ATUALIZAÇÕES DA ÁREA DE DIÁLOGO (GAMEPLAY)
+// 6. ATUALIZAÇÕES DA ÁREA DE DIÁLOGO (GAMEPLAY)
 function setupClientGameplayUI(level) {
     uiElements.gameClientName.innerText = level.clientName;
     uiElements.gameClientType.innerText = level.clientType;
@@ -122,7 +197,6 @@ function updateGameplayBars() {
     uiElements.closingVal.innerText = `${gameState.closing}%`;
     uiElements.closingBar.style.width = `${gameState.closing}%`;
 
-    // Altera cor da barra de humor dependendo do nível crítico
     if (gameState.mood < 30) {
         uiElements.moodBar.style.background = '#ef4444';
     } else if (gameState.mood < 60) {
@@ -133,13 +207,9 @@ function updateGameplayBars() {
 }
 
 function renderStageUI(clientName, stageData) {
-    // Exibe a dica no copiloto lateral
     uiElements.copilotTip.innerText = stageData.copilotTip;
-
-    // Renderiza balão do cliente
     addChatMessage(clientName, stageData.clientText, 'client');
 
-    // Limpa e reconstrói as opções de resposta
     uiElements.choicesContainer.innerHTML = "";
     stageData.options.forEach(opt => {
         const btn = document.createElement('button');
@@ -154,7 +224,6 @@ function clearChoicesUI() {
     uiElements.choicesContainer.innerHTML = "";
 }
 
-// Injeta balões de chat no histórico
 function addChatMessage(sender, text, type) {
     const msgDiv = document.createElement('div');
     msgDiv.className = `msg msg-${type} anim-pop-in`;
@@ -166,13 +235,31 @@ function addChatMessage(sender, text, type) {
     }
 
     uiElements.chatHistory.appendChild(msgDiv);
-    
-    // Rola para a mensagem mais recente
     uiElements.chatHistory.scrollTop = uiElements.chatHistory.scrollHeight;
 }
 
-// 5. TELA DE RESULTADOS (SUCESSO / FALHA)
+// 7. TELA DE RESULTADOS COM RELATÓRIO DE ESTATÍSTICAS
 function showResultScreen(isVictory, level, message, newBadgeUnlocked = false) {
+    // Preenche as estatísticas da partida
+    const totalTurns = gameState.currentMatchStats.totalTurns || 3;
+    const strongTurns = gameState.currentMatchStats.strongTurns || 0;
+    const strongPct = Math.round((strongTurns / totalTurns) * 100);
+    
+    uiElements.statTotalTurns.innerText = totalTurns;
+    uiElements.statStrongPct.innerText = `${strongPct}%`;
+    uiElements.statFinalMood.innerText = `${gameState.mood}%`;
+    
+    // Classificação da persuasão do vendedor
+    let persuasionRating = "Regular";
+    if (isVictory) {
+        if (strongPct >= 80) persuasionRating = "Imbatível! 👑";
+        else if (strongPct >= 50) persuasionRating = "Muito Bom! 🚀";
+        else persuasionRating = "Aceitável 👍";
+    } else {
+        persuasionRating = "Fraco ❌";
+    }
+    uiElements.statPersuasion.innerText = persuasionRating;
+
     if (isVictory) {
         uiElements.resultIcon.innerText = "🎉";
         uiElements.resultTitle.innerText = "Venda Concluída!";
@@ -188,7 +275,6 @@ function showResultScreen(isVictory, level, message, newBadgeUnlocked = false) {
             uiElements.resultPerformance.style.color = "var(--fys-orange)";
         }
 
-        // Mostra o distintivo desbloqueado se aplicável
         if (newBadgeUnlocked && level.successBadge) {
             uiElements.badgeUnlockedSection.style.display = 'flex';
             uiElements.unlockedBadgeName.innerText = level.successBadge.name;
@@ -213,4 +299,14 @@ function showResultScreen(isVictory, level, message, newBadgeUnlocked = false) {
     }
 
     showScreen('result');
+}
+
+// 8. ATUALIZADORES DE MUTE E ALTERNADOR DE TEMA
+function updateAudioMuteButtonUI() {
+    uiElements.btnToggleMute.innerText = isAudioMuted ? "🔇" : "🔊";
+}
+
+function updateThemeButtonUI() {
+    const isLightTheme = document.body.classList.contains('light-theme');
+    uiElements.btnToggleTheme.innerText = isLightTheme ? "☀️" : "🌙";
 }

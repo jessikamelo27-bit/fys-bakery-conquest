@@ -30,3 +30,15 @@
     /* Suavização de Transições */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* 2. TEMA CLARO (SOBRESCRITA DE VARIÁVEIS) */
+.light-theme {
+    --bg-dark: #f3f4f6;
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --bg-card-border: rgba(0, 0, 0, 0.08);
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    
+    /* Ajustes específicos de contrastes para o tema claro */
+    --bg-card-light: rgba(255, 255, 255, 0.9);
+}

@@ -754,3 +754,353 @@ body::after {
         grid-template-columns: 1fr;
     }
 }
+
+/* 10. CONTROLES DE HEADER (ÁUDIO E TEMA) */
+.header-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: var(--transition-smooth);
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.08);
+}
+
+/* 11. SISTEMA DE MÚLTIPLOS PERFIS DE JOGADORES */
+.profile-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-card:hover, .profile-card.active {
+    background: rgba(0, 82, 255, 0.15);
+    border-color: var(--fys-blue);
+    transform: translateY(-2px);
+}
+
+.profile-card.active {
+    box-shadow: 0 0 10px rgba(0, 82, 255, 0.3);
+}
+
+.profile-creator {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-field {
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--fys-orange);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+}
+
+/* 12. PAINEL DE CONQUISTAS (ACHIEVEMENTS GALLERY) */
+.achievements-section {
+    max-width: 1000px;
+    margin: 40px auto 0 auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 30px;
+}
+
+.achievements-section h3 {
+    font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.achievements-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.achievement-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: var(--transition-smooth);
+}
+
+.achievement-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ach-icon {
+    font-size: 2.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ach-info h4 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.ach-info p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.achievement-item.locked {
+    opacity: 0.4;
+}
+
+.achievement-item.locked .ach-icon {
+    filter: grayscale(1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* 13. TABELA DE ESTATÍSTICAS DA RODADA */
+.stats-table-container {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0 30px 0;
+}
+
+.stats-table-container h4 {
+    font-family: var(--font-heading);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    color: #fff;
+    text-align: left;
+}
+
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.88rem;
+}
+
+.stats-table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stats-table tr:last-child {
+    border-bottom: none;
+}
+
+.stats-table td {
+    padding: 10px 5px;
+}
+
+.stats-table td.val {
+    text-align: right;
+    font-weight: 700;
+}
+
+/* 14. SOUPESCRITA DO TEMA CLARO */
+.light-theme {
+    /* Ajustes de sombras e fundos */
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --bg-card-border: rgba(0, 0, 0, 0.08);
+}
+
+.light-theme body::before {
+    background: radial-gradient(circle, rgba(0, 82, 255, 0.04) 0%, transparent 70%);
+}
+
+.light-theme body::after {
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.04) 0%, transparent 70%);
+}
+
+.light-theme .app-header,
+.light-theme .welcome-card,
+.light-theme .level-card,
+.light-theme .card-glass,
+.light-theme .intro-card,
+.light-theme .achievement-item,
+.light-theme .profile-card,
+.light-theme .result-stat {
+    background: var(--bg-card);
+    border-color: var(--bg-card-border);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    color: var(--text-main);
+}
+
+.light-theme .client-panel h3,
+.light-theme .level-card h3,
+.light-theme .intro-card h3,
+.light-theme .welcome-card h1,
+.light-theme .section-title h2,
+.light-theme .stats-table-container h4 {
+    color: #111827;
+}
+
+.light-theme .msg-client {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .choice-btn {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.06);
+    color: var(--text-main);
+}
+
+.light-theme .choice-btn:hover {
+    background: rgba(255, 107, 0, 0.06);
+    border-color: var(--fys-orange);
+}
+
+.light-theme .choices-panel {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.light-theme .stats-table-container {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .stats-table tr {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+.light-theme .input-field {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #111827;
+}
+
+.light-theme .control-btn {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.light-theme .control-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.light-theme .stat-badge {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* 15. MELHORIAS EM RESPONSIVIDADE PARA MÓVEL */
+@media (max-width: 480px) {
+    body {
+        font-size: 0.9rem;
+    }
+    .app-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 15px;
+    }
+    .logo-area {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .brand-title {
+        border-left: none;
+        padding-left: 0;
+        margin-top: 2px;
+    }
+    .stats-area {
+        width: 100%;
+        justify-content: center;
+    }
+    .welcome-card {
+        padding: 30px 15px;
+    }
+    .welcome-card h1 {
+        font-size: 1.7rem;
+    }
+    .fys-glow-logo {
+        font-size: 3.5rem;
+    }
+    .achievements-list {
+        grid-template-columns: 1fr;
+    }
+    .result-stats {
+        grid-template-columns: 1fr;
+    }
+    .result-actions {
+        flex-direction: column;
+    }
+    .choices-panel {
+        padding: 15px;
+    }
+    .choice-btn {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+    .client-header {
+        justify-content: center;
+    }
+}

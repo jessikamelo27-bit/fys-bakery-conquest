@@ -54,11 +54,14 @@ O **FYS Bakery Conquest** é um simulador de vendas em estilo RPG de conversaç�
 ## ✨ Funcionalidades
 
 *   ✔ **Sistema de Diálogos & Objeções:** Árvore de decisões comerciais baseada em dados reais da live da FYS.
-*   ✔ **Lógica de Humor e Fechamento:** Barras dinâmicas que reagem imediatamente a cada argumento do vendedor.
-*   ✔ **Persistência de Dados:** Uso de `localStorage` para manter XP e distintivos salvos caso o navegador seja fechado.
-*   ✔ **Interface Responsiva:** Otimizada para celulares de vendedores em campo e desktops de recrutadores.
-*   ✔ **Gamificação:** Desbloqueio de medalhas (badges) exclusivas baseadas em seu desempenho de negociação.
-*   ✔ **Feedback do Copiloto:** Um painel com feedbacks instrutivos que ensinam o vendedor sobre o posicionamento da FYS a cada rodada.
+*   ✔ **Mapeamento de Métricas:** Barras dinâmicas de Humor do Cliente e Fechamento de Venda que reagem em tempo real.
+*   ✔ **Síntese de Áudio Autônoma:** Trilha sonora e efeitos sonoros gerados em tempo real via **Web Audio API** do próprio navegador, sem consumir dados ou requerer downloads de áudio externos.
+*   ✔ **Múltiplos Perfis de Jogador:** Permite criar e gerenciar diferentes perfis salvos individualmente no mesmo navegador.
+*   ✔ **Relatório de Estatísticas de Partida:** Painel exibindo total de turnos, porcentagem de argumentos FYS ideais utilizados, humor final e uma classificação do poder de persuasão.
+*   ✔ **Galeria de Conquistas (Badges):** Visualização interativa no menu de rotas contendo medalhas desbloqueáveis (Dono da Geladeira, Conquistador Gourmet, Mestre Supremo de Vendas FYS).
+*   ✔ **Modo Escuro & Modo Claro Integrado:** Botão nativo para alternar a interface e a paleta de cores.
+*   ✔ **Persistência de Dados:** Uso de `localStorage` para manter o XP, rotas concluídas e conquistas de cada perfil salvas de forma persistente.
+*   ✔ **Responsividade Móvel Refinada:** Interface e controles redesenhados e testados para funcionamento confortável em celulares de vendedores em campo.
 
 ---
 
@@ -71,19 +74,20 @@ A organização do projeto segue a arquitetura modular limpa e profissional:
 ├── LICENSE           # Licença MIT
 ├── README.md         # Documentação e portfólio (este arquivo)
 ├── css/
-│   ├── variables.css # Definição de cores, fontes e design tokens
+│   ├── variables.css # Definição de cores, fontes, temas e design tokens
 │   ├── animations.css# Transições visuais e keyframes de efeitos
 │   └── style.css     # Estilos de layout estrutural e componentes
 ├── js/
-│   ├── storage.js    # Controlador de leitura e gravação no localStorage
-│   ├── game.js       # Banco de dados das rotas e controle de fluxo do jogo
-│   ├── ui.js         # Atualizações do DOM, barras de progresso e chat
-│   └── app.js        # Inicialização do jogo e escuta de eventos de clique
+│   ├── audio.js      # Gerador e sintetizador autônomo de efeitos sonoros e BGM
+│   ├── storage.js    # Controlador de perfis e salvamento no localStorage
+│   ├── game.js       # Banco de dados das rotas, diálogos e fluxo lógico
+│   ├── ui.js         # Atualizações do DOM, barras de progresso e estatísticas
+│   └── app.js        # Inicialização do jogo e escuta de eventos globais
 └── assets/
     ├── img/          # Capturas de tela (screenshots)
     ├── gif/          # Demonstração gravada em loop (GIF)
     ├── icons/        # Logotipos e ícones gráficos
-    └── audio/        # Efeitos sonoros (expansão futura)
+    └── audio/        # Efeitos sonoros (arquivos estáticos para expansão)
 ```
 
 ---
@@ -107,18 +111,20 @@ Basta acessar o link da demonstração:
 ## 📚 Aprendizados
 
 Durante o desenvolvimento deste desafio, foi possível praticar e consolidar:
+*   **Síntese Sonora via Código:** Utilização da Web Audio API para produzir trilha sonora e feedbacks de efeitos sonoros programaticamente, mantendo o repositório leve (sem carregar megabytes em arquivos de áudio) e garantindo funcionamento 100% offline.
 *   **Modularização de Front-end Estático:** Divisão de código CSS e JS mantendo a compatibilidade offline (sem gerar bloqueios de CORS que impediriam a abertura direta do arquivo `index.html` localmente).
-*   **Técnicas de Gamificação (EdTech):** Aplicação de mecânicas de jogos (pontos de experiência, conquistas, barras de humor do cliente) para fixação de conteúdos de treinamento corporativo.
-*   **Lógica de Árvore de Decisão:** Modelagem de dados de conversação interativa que respondem de forma condicional à escolha do usuário.
+*   **Gerenciamento de Estados Complexos (Perfis Múltiplos):** Manuseio do `localStorage` para orquestrar dados isolados para múltiplos jogadores.
+*   **Mecânicas de EdTech (Gamificação):** Tradução de dados de treinamento comercial em mecânicas lúdicas para aceleração do aprendizado prático.
 
 ---
 
 ## 🔮 Melhorias Futuras
 
 Se eu retornar a este projeto no futuro, pretendo implementar:
-*   🏆 **Ranking de Vendedores:** Placar de líderes online conectado a um banco de dados na nuvem para engajar times comerciais.
+*   🏆 **Ranking Global de Vendedores:** Placar de líderes online conectado a um banco de dados em tempo real (Firebase/Supabase).
+*   🎙 **Negociação via Voz:** Integração com APIs de reconhecimento de fala para permitir que o vendedor contorne as objeções falando verbalmente.
+*   🗺 **Mapa Interativo do Brasil:** Visualização de rota estilo tabuleiro que se expande por diferentes estados brasileiros.
 *   💾 **Nuvem Save:** Salvamento integrado com contas corporativas.
-*   🎵 **Efeitos de Áudio:** Músicas de fundo animadas e feedbacks sonoros para acertos e erros de negociações.
 *   📱 **Análise de PDV por Foto:** Integração de IA de visão computacional para analisar fotos da geladeira tiradas pelo vendedor.
 
 ---

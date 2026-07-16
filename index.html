@@ -29,6 +29,10 @@
                     <span class="icon">🏆</span>
                     <span class="value">0 Conquistas</span>
                 </div>
+                <div class="header-controls">
+                    <button class="control-btn" id="btn-toggle-mute" title="Mutar/Desmutar Som">🔊</button>
+                    <button class="control-btn" id="btn-toggle-theme" title="Alternar Modo Claro/Escuro">🌙</button>
+                </div>
             </div>
         </header>
 
@@ -61,6 +65,18 @@
                     </div>
 
                     <button class="btn btn-primary" id="btn-start-game">Iniciar Treinamento</button>
+
+                    <!-- SEÇÃO DE MÚLTIPLOS PERFIS DE JOGADORES -->
+                    <div class="profile-section">
+                        <h3>Múltiplos Perfis de Jogador</h3>
+                        <div class="profile-container" id="profiles-list-container">
+                            <!-- Perfis cadastrados serão injetados pelo JS -->
+                        </div>
+                        <div class="profile-creator">
+                            <input type="text" id="new-profile-name" class="input-field" placeholder="Nome do novo jogador..." maxlength="15">
+                            <button class="btn btn-secondary btn-small" id="btn-create-profile">Criar Perfil</button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -112,6 +128,14 @@
                             <span class="diff-stars text-hard">⭐⭐⭐ Difícil</span>
                         </div>
                         <div class="lock-indicator">🔒 Vencer Nível 1 & 2 para Desbloquear</div>
+                    </div>
+                </div>
+
+                <!-- PAINEL DE CONQUISTAS (ACHIEVEMENTS) -->
+                <div class="achievements-section card-glass">
+                    <h3>🏆 Conquistas do Vendedor</h3>
+                    <div class="achievements-list" id="achievements-container">
+                        <!-- Conquistas geradas pelo JS -->
                     </div>
                 </div>
 
@@ -193,6 +217,29 @@
                         </div>
                     </div>
 
+                    <!-- TABELA DE ESTATÍSTICAS DA PARTIDA -->
+                    <div class="stats-table-container">
+                        <h4>📈 Estatísticas da Partida</h4>
+                        <table class="stats-table">
+                            <tr>
+                                <td>Total de Argumentos Usados:</td>
+                                <td class="val" id="stat-total-turns">0</td>
+                            </tr>
+                            <tr>
+                                <td>Argumentos Fortes (FYS):</td>
+                                <td class="val" id="stat-strong-pct">0%</td>
+                            </tr>
+                            <tr>
+                                <td>Nível de Humor Final:</td>
+                                <td class="val" id="stat-final-mood">0%</td>
+                            </tr>
+                            <tr>
+                                <td>Poder de Persuasão:</td>
+                                <td class="val" id="stat-persuasion">Excelente</td>
+                            </tr>
+                        </table>
+                    </div>
+
                     <div class="badge-unlocked-card" id="badge-unlocked-section">
                         <div class="badge-icon">🎖️</div>
                         <div>
@@ -217,6 +264,7 @@
         </footer>
     </div>
 
+    <script src="js/audio.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/game.js"></script>
     <script src="js/ui.js"></script>
