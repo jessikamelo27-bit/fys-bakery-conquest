@@ -24,7 +24,7 @@ Acesse a versão online e jogue diretamente no seu navegador clicando no botão 
 | ![Rotas de Venda](assets/img/screenshot-routes-top.png) | ![Conquistas](assets/img/screenshot-routes-bottom.png) |
 | **📷 Batalha de Negociação** | **📷 Vitória e Premiação** |
 | ![Gameplay](assets/img/screenshot-gameplay.png) | ![Vitória](assets/img/screenshot-victory-top.png) |
-| **📷 Estatísticas da Partida** | **📷 GIF Demonstrativo (Placeholder)** |
+| **📷 Estatísticas da Partida** | **🎬 GIF Demonstrativo do Fluxo** |
 | ![Estatísticas](assets/img/screenshot-victory-bottom.png) | ![GIF Demo](assets/gif/demo.gif) |
 
 ---
