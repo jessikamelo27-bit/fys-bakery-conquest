@@ -139,12 +139,57 @@ function updateHeaderStats() {
 }
 
 function updateLevelGrid() {
+    const isLevel3Unlocked = gameState.levelsCompleted.includes(1) && gameState.levelsCompleted.includes(2);
+
     uiElements.levelCards.forEach(card => {
         const levelId = parseInt(card.getAttribute('data-level'));
         if (!levelId) return;
 
         const playBtn = card.querySelector('.btn-play-level');
 
+        // Se for nível 3, controla a trava e seu respectivo botão dinamicamente
+        if (levelId === 3) {
+            const lockIndicator = card.querySelector('.lock-indicator');
+            if (isLevel3Unlocked) {
+                card.classList.remove('locked');
+                if (lockIndicator) {
+                    lockIndicator.innerHTML = "<span style='color:var(--heineken-neon)'>🎉 Desbloqueado!</span>";
+                }
+                
+                // Cria ou atualiza o botão se ele não existir
+                if (!playBtn) {
+                    const btn = document.createElement('button');
+                    btn.className = `btn btn-play-level ${gameState.levelsCompleted.includes(3) ? 'btn-outline' : 'btn-secondary'}`;
+                    btn.setAttribute('data-level', '3');
+                    btn.innerText = gameState.levelsCompleted.includes(3) ? "Refazer Rota 🔄" : "Visitar Rede";
+                    btn.addEventListener('click', () => startLevel(3));
+                    card.appendChild(btn);
+                } else {
+                    playBtn.innerText = gameState.levelsCompleted.includes(3) ? "Refazer Rota 🔄" : "Visitar Rede";
+                    if (gameState.levelsCompleted.includes(3)) {
+                        playBtn.classList.remove('btn-secondary');
+                        playBtn.classList.add('btn-outline');
+                        card.style.borderColor = 'var(--heineken-neon)';
+                    } else {
+                        playBtn.classList.remove('btn-outline');
+                        playBtn.classList.add('btn-secondary');
+                        card.style.borderColor = 'var(--bg-card-border)';
+                    }
+                }
+            } else {
+                card.classList.add('locked');
+                if (lockIndicator) {
+                    lockIndicator.innerHTML = "🔒 Vencer Nível 1 & 2 para Desbloquear";
+                }
+                if (playBtn) {
+                    playBtn.remove();
+                }
+                card.style.borderColor = 'var(--bg-card-border)';
+            }
+            return;
+        }
+
+        // Para níveis 1 e 2
         if (gameState.levelsCompleted.includes(levelId)) {
             card.style.borderColor = 'var(--heineken-neon)';
             if(playBtn) {
@@ -162,22 +207,6 @@ function updateLevelGrid() {
         }
     });
 
-    // Desbloqueia dinamicamente o Nível 3 caso 1 e 2 estejam completos
-    const level3Card = document.querySelector('.level-card.locked');
-    if (level3Card && gameState.levelsCompleted.includes(1) && gameState.levelsCompleted.includes(2)) {
-        level3Card.classList.remove('locked');
-        level3Card.querySelector('.lock-indicator').innerHTML = "<span style='color:var(--heineken-neon)'>🎉 Desbloqueado!</span>";
-        
-        if (!level3Card.querySelector('.btn-play-level')) {
-            const btn = document.createElement('button');
-            btn.className = "btn btn-secondary btn-play-level";
-            btn.setAttribute('data-level', '3');
-            btn.innerText = "Visitar Rede";
-            btn.addEventListener('click', () => startLevel(3));
-            level3Card.appendChild(btn);
-        }
-    }
-    
     // Atualiza a galeria de conquistas interativa
     renderAchievementsGallery();
 }

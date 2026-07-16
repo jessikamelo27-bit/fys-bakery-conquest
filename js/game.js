@@ -96,6 +96,7 @@ const gameLevels = {
             }
         ],
         successBadge: {
+            key: "dono_da_geladeira",
             name: "Dono da Geladeira",
             desc: "Convenceu o Seu Manoel a abrir espaço para FYS em sua padaria tradicional usando a força da Heineken.",
             icon: "🧊"
@@ -194,11 +195,111 @@ const gameLevels = {
             }
         ],
         successBadge: {
+            key: "conquistador_gourmet",
             name: "Conquistador Gourmet",
             desc: "Quebrou a barreira do público saudável e introduziu FYS em uma panificadora gourmet de alta classe.",
             icon: "🍰"
         },
         xpReward: 200
+    },
+    3: {
+        id: 3,
+        clientName: "Carlos (Pão de Ouro)",
+        clientType: "Grandes Contas (Key Accounts)",
+        avatar: "🏢",
+        objections: [
+            {
+                stage: 0,
+                clientText: "Olá, sou o Carlos, gerente de compras da rede Pão de Ouro. Nós temos 5 lojas de alto volume e o nosso espaço em gôndola é disputadíssimo. Para colocarmos uma marca desafiante como FYS em todas as lojas, precisamos ver um plano de Trade Marketing sólido. O que propõem?",
+                copilotTip: "Dica: Carlos quer ações de visibilidade e parcerias estruturadas no PDV. Proponha pontas de gôndola e degustações aliadas a anúncios locais.",
+                options: [
+                    {
+                        text: "FYS se vende sozinho por causa do preço competitivo, Carlos! Não precisamos gastar com planos complicados de marketing.",
+                        moodChange: -20,
+                        closingChange: 0,
+                        type: 'weak',
+                        feedback: "Muito desleixado. O comprador corporativo exige profissionalismo e ações de marketing estruturadas para justificar o espaço."
+                    },
+                    {
+                        text: "Nós vamos disponibilizar displays de ponta de gôndola exclusivos e realizar ações de degustação aos sábados nas 5 lojas, integrando com anúncios geolocalizados nas redes sociais para atrair o público local.",
+                        moodChange: 15,
+                        closingChange: 35,
+                        type: 'strong',
+                        feedback: "Excelente! Demonstra maturidade de Trade: combina visibilidade física (pontas de gôndola e degustação) com atração digital no bairro."
+                    },
+                    {
+                        text: "Nós podemos colar alguns cartazes da FYS nas portas de entrada e dar camisetas para os seus repositores de estoque.",
+                        moodChange: 5,
+                        closingChange: 15,
+                        type: 'average',
+                        feedback: "Fraco. Cartazes simples e camisetas não geram a experiência de experimentação que um produto inovador necessita."
+                    }
+                ]
+            },
+            {
+                stage: 1,
+                clientText: "Gostei da proposta de ponta de gôndola. Mas e os dados logísticos? Não posso arriscar ruptura de estoque nas lojas ou ter fardos vencendo em gôndolas de baixo giro. Como garantem o reabastecimento?",
+                copilotTip: "Dica: Ele precisa de segurança de cadeia de suprimentos. Destaque o poder e a automação do sistema logístico do Grupo Heineken.",
+                options: [
+                    {
+                        text: "A nossa distribuição é integrada 100% à malha logística do Grupo Heineken, com entregas programadas semanais e reposição automática baseada no histórico de vendas, eliminando o risco de ruptura.",
+                        moodChange: 20,
+                        closingChange: 35,
+                        type: 'strong',
+                        feedback: "Perfeito! A estrutura logística da Heineken traz total credibilidade e estabilidade, tranquilizando o comprador de grandes contas."
+                    },
+                    {
+                        text: "Se faltar refrigerante nas lojas, eu garanto que trago fardos extras no porta-malas do meu próprio carro no mesmo dia.",
+                        moodChange: -15,
+                        closingChange: 5,
+                        type: 'weak',
+                        feedback: "Inadequado. Soluções informais e improvisadas assustam compradores corporativos que exigem processos estruturados."
+                    },
+                    {
+                        text: "Temos uma equipe de promotores que vai visitar as lojas duas vezes por semana para contar as gôndolas e nos enviar os pedidos de reposição.",
+                        moodChange: 10,
+                        closingChange: 20,
+                        type: 'average',
+                        feedback: "Mediano. Embora os promotores ajudem na auditoria de loja, o processo automatizado da Heineken é muito mais atraente."
+                    }
+                ]
+            },
+            {
+                stage: 2,
+                clientText: "A logística da Heineken nos dá bastante segurança. Mas para assinar a exclusividade de refrigerantes premium desafiantes nas 5 lojas, eu preciso de um apelo promocional forte. Qual a oferta final para fechar o contrato?",
+                copilotTip: "Dica: Proponha uma parceria estratégica inovadora de combo alimentício e destaque nos caixas (checkout) das lojas.",
+                options: [
+                    {
+                        text: "Propomos o combo exclusivo 'Lanche Pão de Ouro + FYS' com desconto de introdução subsidiado no primeiro mês, além de destacar latas FYS nas geladeiras de checkout (bocas de caixa) para compra por impulso.",
+                        moodChange: 15,
+                        closingChange: 40,
+                        type: 'strong',
+                        feedback: "Brilhante! O combo cruzado (lanche + refri) impulsiona o ticket médio das lojas, e a exposição nos checkouts captura a compra por impulso. Negócio fechado!"
+                    },
+                    {
+                        text: "Eu posso te dar 10% de desconto na primeira compra de fardos e depois voltamos a negociar o preço de tabela.",
+                        moodChange: 5,
+                        closingChange: 15,
+                        type: 'average',
+                        feedback: "Razoável. O desconto ajuda no início, mas não propõe uma mecânica duradoura de venda casada para as lojas."
+                    },
+                    {
+                        text: "Infelizmente nossa margem com FYS já está no limite. Não temos como fazer nenhuma promoção extra, o senhor deveria aceitar o preço padrão.",
+                        moodChange: -20,
+                        closingChange: -10,
+                        type: 'weak',
+                        feedback: "Ruim. Numa negociação de rede (Key Account), a falta de flexibilidade e a recusa em criar campanhas promocionais cancelam a parceria."
+                    }
+                ]
+            }
+        ],
+        successBadge: {
+            key: "mestre_vendas",
+            name: "Mestre Supremo de Vendas FYS",
+            desc: "Alcançou o nível corporativo e fechou distribuição de FYS com a Rede Pão de Ouro.",
+            icon: "👑"
+        },
+        xpReward: 300
     }
 };
 
@@ -223,36 +324,6 @@ let gameState = {
 function startLevel(levelId) {
     // Tenta inicializar o som se houver interação humana
     initFysAudio();
-
-    // Caso especial para Nível 3 (Simulado)
-    if (levelId === 3) {
-        alert("Parabéns! Você alcançou o nível corporativo. Seu desafio final é fechar o contrato nacional com a Rede Pão de Ouro.");
-        gameState.xp += 300;
-        if (!gameState.unlockedBadges.includes('mestre_vendas')) {
-            gameState.unlockedBadges.push('mestre_vendas');
-        }
-        gameState.levelsCompleted.push(3);
-        saveGameState(gameState);
-        updateHeaderStats();
-        updateLevelGrid();
-        
-        // FX de Vitória
-        playAudioVictory();
-
-        // Configuração de dados de estatísticas simulados para o Nível Especial 3
-        gameState.currentMatchStats = { totalTurns: 4, strongTurns: 4 };
-
-        showResultScreen(true, {
-            clientName: "Rede Pão de Ouro",
-            xpReward: 300,
-            successBadge: {
-                name: "Mestre Supremo de Vendas FYS",
-                desc: "Parcerias de nível corporativo e distribuição nacional fechadas com sucesso!",
-                icon: "👑"
-            }
-        }, "Você fechou um contrato de exclusividade de refrigerantes para todas as 5 lojas da Rede Pão de Ouro! O diretor de compras adorou o projeto de combos locais e a margem de FYS.");
-        return;
-    }
 
     const level = gameLevels[levelId];
     gameState.currentLevel = levelId;
@@ -355,7 +426,7 @@ function finishLevel(isVictory) {
         }
 
         // Registra novas conquistas
-        const badgeKey = level.successBadge.name.toLowerCase().replace(/ /g, '_');
+        const badgeKey = level.successBadge.key || level.successBadge.name.toLowerCase().replace(/ /g, '_');
         let newBadgeUnlocked = false;
         if (!gameState.unlockedBadges.includes(badgeKey)) {
             gameState.unlockedBadges.push(badgeKey);
