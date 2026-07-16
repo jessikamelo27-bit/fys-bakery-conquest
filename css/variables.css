@@ -1,0 +1,32 @@
+/* VARIABLES.CSS - FYS BAKERY CONQUEST */
+/* Define as variáveis globais, design tokens e paleta de cores do simulador */
+
+:root {
+    /* Cores de Fundo (Tema Escuro) */
+    --bg-dark: #070a12;
+    --bg-card: rgba(18, 25, 41, 0.6);
+    --bg-card-border: rgba(255, 255, 255, 0.08);
+    
+    /* Cores de Texto */
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    
+    /* Paleta de Cores Institucionais (Heineken & FYS) */
+    --heineken-green: #008248;
+    --heineken-neon: #10b981;
+    --fys-orange: #ff6b00;
+    --fys-blue: #0052ff;
+    --fys-acid: #d4ff00;
+    
+    /* Efeitos, Sombras e Gradientes */
+    --gradient-fys: linear-gradient(135deg, var(--fys-orange) 0%, var(--fys-blue) 100%);
+    --gradient-glass: rgba(255, 255, 255, 0.04);
+    --gradient-glow: 0 0 20px rgba(0, 82, 255, 0.25);
+    
+    /* Tipografia (Fontes do Google Fonts) */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Suavização de Transições */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

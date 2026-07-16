@@ -1,6 +1,7 @@
-// JAVASCRIPT PRINCIPAL - FYS BAKERY CONQUEST
+/* GAME.JS - FYS BAKERY CONQUEST */
+/* Controla a base de dados de objeções, lógica de diálogos e fluxo de jogo */
 
-// 1. BANCO DE DADOS DE DIÁLOGOS E OBJEÇÕES (Baseado na Live FYS)
+// 1. BANCO DE DADOS DE OBJEÇÕES E CLIENTES (Baseado na Live FYS)
 const gameLevels = {
     1: {
         id: 1,
@@ -182,7 +183,7 @@ const gameLevels = {
     }
 };
 
-// 2. ESTADO DO JOGO
+// Varável global de controle de estado
 let gameState = {
     xp: 0,
     unlockedBadges: [],
@@ -193,153 +194,17 @@ let gameState = {
     levelsCompleted: []
 };
 
-// Carregar progresso do localStorage
-function loadProgress() {
-    const savedState = localStorage.getItem('fys_bakery_conquest_state');
-    if (savedState) {
-        try {
-            gameState = JSON.parse(savedState);
-            updateHeaderStats();
-            updateLevelGrid();
-        } catch (e) {
-            console.error("Erro ao carregar progresso salvo", e);
-        }
-    }
-}
-
-// Salvar progresso no localStorage
-function saveProgress() {
-    localStorage.setItem('fys_bakery_conquest_state', JSON.stringify(gameState));
-}
-
-// 3. SELETORES E ELEMENTOS DA DOM
-const screens = {
-    welcome: document.getElementById('screen-welcome'),
-    levels: document.getElementById('screen-levels'),
-    gameplay: document.getElementById('screen-gameplay'),
-    result: document.getElementById('screen-result')
-};
-
-// Botões de navegação
-const btnStartGame = document.getElementById('btn-start-game');
-const btnBackWelcome = document.getElementById('btn-back-welcome');
-const btnNextStep = document.getElementById('btn-next-step');
-const btnRestart = document.getElementById('btn-restart');
-
-// 4. INICIALIZAÇÃO E EVENTOS
-document.addEventListener('DOMContentLoaded', () => {
-    loadProgress();
-    
-    // Iniciar jogo -> Ir para seleção de rotas
-    btnStartGame.addEventListener('click', () => {
-        showScreen('levels');
-    });
-
-    // Voltar para tela inicial
-    btnBackWelcome.addEventListener('click', () => {
-        showScreen('welcome');
-    });
-
-    // Botões de jogar nível (rotas)
-    document.querySelectorAll('.btn-play-level').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const levelId = parseInt(e.target.getAttribute('data-level'));
-            startLevel(levelId);
-        });
-    });
-
-    // Próximo passo após resultado
-    btnNextStep.addEventListener('click', () => {
-        showScreen('levels');
-    });
-
-    // Resetar tudo
-    btnRestart.addEventListener('click', () => {
-        if(confirm("Deseja resetar todo o seu progresso no simulador?")) {
-            gameState = {
-                xp: 0,
-                unlockedBadges: [],
-                currentLevel: null,
-                currentStage: 0,
-                mood: 80,
-                closing: 0,
-                levelsCompleted: []
-            };
-            saveProgress();
-            updateHeaderStats();
-            updateLevelGrid();
-            showScreen('welcome');
-        }
-    });
-});
-
-// Alternar entre telas
-function showScreen(screenId) {
-    Object.values(screens).forEach(screen => {
-        screen.classList.remove('active');
-    });
-    screens[screenId].classList.add('active');
-}
-
-// Atualizar informações da barra do cabeçalho
-function updateHeaderStats() {
-    document.getElementById('xp-display').querySelector('.value').innerText = `${gameState.xp} XP`;
-    document.getElementById('badges-count').querySelector('.value').innerText = `${gameState.unlockedBadges.length} Conquistas`;
-}
-
-// Atualizar o grid de seleção de níveis
-function updateLevelGrid() {
-    document.querySelectorAll('.level-card').forEach(card => {
-        const levelId = parseInt(card.getAttribute('data-level'));
-        if (!levelId) return; // Nível 3 que está bloqueado e não tem levelId de dados
-
-        const playBtn = card.querySelector('.btn-play-level');
-
-        if (gameState.levelsCompleted.includes(levelId)) {
-            card.style.borderColor = 'var(--heineken-neon)';
-            if(playBtn) {
-                playBtn.innerText = "Refazer Rota 🔄";
-                playBtn.classList.remove('btn-secondary');
-                playBtn.classList.add('btn-outline');
-            }
-        } else {
-            card.style.borderColor = 'var(--bg-card-border)';
-            if(playBtn) {
-                playBtn.innerText = "Visitar Padaria";
-                playBtn.classList.remove('btn-outline');
-                playBtn.classList.add('btn-secondary');
-            }
-        }
-    });
-
-    // Desbloquear Nível 3 se Nível 1 & 2 estiverem completos
-    const level3Card = document.querySelector('.level-card.locked');
-    if (level3Card && gameState.levelsCompleted.includes(1) && gameState.levelsCompleted.includes(2)) {
-        level3Card.classList.remove('locked');
-        level3Card.querySelector('.lock-indicator').innerHTML = "<span style='color:var(--heineken-neon)'>🎉 Desbloqueado!</span>";
-        // Criar botão de jogar para o nível 3
-        if (!level3Card.querySelector('.btn-play-level')) {
-            const btn = document.createElement('button');
-            btn.className = "btn btn-secondary btn-play-level";
-            btn.setAttribute('data-level', '3');
-            btn.innerText = "Visitar Rede";
-            btn.addEventListener('click', () => startLevel(3));
-            level3Card.appendChild(btn);
-        }
-    }
-}
-
-// 5. LÓGICA DO GAMEPLAY (DUELO DE VENDAS)
+// Inicializa a rota selecionada
 function startLevel(levelId) {
-    // Caso especial para Nível 3 (Bônus corporativo simulado)
+    // Caso especial para Nível 3 (Simulado)
     if (levelId === 3) {
-        alert("Parabéns! Você alcançou o nível corporativo. Seu desafio final é fechar o contrato nacional. Esta etapa final valida o aprendizado das outras duas padarias!");
+        alert("Parabéns! Você alcançou o nível corporativo. Seu desafio final é fechar o contrato nacional com a Rede Pão de Ouro.");
         gameState.xp += 300;
         if (!gameState.unlockedBadges.includes('mestre_vendas')) {
             gameState.unlockedBadges.push('mestre_vendas');
         }
         gameState.levelsCompleted.push(3);
-        saveProgress();
+        saveGameState(gameState);
         updateHeaderStats();
         updateLevelGrid();
         showResultScreen(true, {
@@ -360,80 +225,59 @@ function startLevel(levelId) {
     gameState.mood = 80;
     gameState.closing = 0;
 
-    // Configurar HUD do Cliente
-    document.getElementById('game-client-name').innerText = level.clientName;
-    document.getElementById('game-client-type').innerText = level.clientType;
-    document.getElementById('game-client-avatar').innerText = level.avatar;
-    
-    // Limpar Chat
-    const chatHistory = document.getElementById('chat-history');
-    chatHistory.innerHTML = "";
+    // Atualiza a interface gráfica do cliente selecionado
+    setupClientGameplayUI(level);
 
-    // Iniciar primeira fala do cliente
+    // Renderiza a primeira objeção
     showGameplayStage();
     showScreen('gameplay');
 }
 
-// Renderiza o estágio atual do diálogo do cliente e as escolhas do jogador
+// Controla o fluxo de diálogo de cada objeção
 function showGameplayStage() {
     const level = gameLevels[gameState.currentLevel];
     const stageData = level.objections[gameState.currentStage];
 
-    // Atualizar Barras de Progresso
+    // Atualiza as barras de progresso (humor e fechamento)
     updateGameplayBars();
 
-    // Atualizar dica do Copiloto de IA no painel lateral
-    document.getElementById('copilot-tip').innerText = stageData.copilotTip;
-
-    // Adicionar fala do cliente ao Chat
-    addChatMessage(level.clientName, stageData.clientText, 'client');
-
-    // Renderizar Botões de Escolha de Argumentos
-    const choicesContainer = document.getElementById('choices-container');
-    choicesContainer.innerHTML = "";
-
-    stageData.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.className = "choice-btn";
-        btn.innerText = opt.text;
-        btn.addEventListener('click', () => handleChoice(opt));
-        choicesContainer.appendChild(btn);
-    });
+    // Renderiza a nova objeção do cliente e opções de resposta
+    renderStageUI(level.clientName, stageData);
 }
 
-// Lida com a escolha do argumento pelo jogador
+// Analisa a resposta escolhida pelo vendedor
 function handleChoice(option) {
     const level = gameLevels[gameState.currentLevel];
     
-    // Desabilitar botões durante animações
-    document.getElementById('choices-container').innerHTML = "";
+    // Oculta as escolhas para evitar duplo clique durante a animação
+    clearChoicesUI();
 
-    // Adicionar resposta do vendedor no chat
+    // Adiciona o balão de resposta do jogador
     addChatMessage('Você (Vendedor FYS)', option.text, 'vendor');
 
-    // Aplicar consequências
+    // Atualiza os valores baseado no impacto da resposta
     gameState.mood = Math.max(0, Math.min(100, gameState.mood + option.moodChange));
     gameState.closing = Math.max(0, Math.min(100, gameState.closing + option.closingChange));
 
-    // Mostrar feedback do sistema após pequeno delay
+    // Mostra o feedback do copiloto após um pequeno delay
     setTimeout(() => {
         addChatMessage('Copiloto FYS', option.feedback, 'system');
         updateGameplayBars();
 
-        // Verificar fim de jogo (derrota por falta de humor)
+        // Verifica condição de derrota imediata (humor chegou a zero)
         if (gameState.mood <= 0) {
             setTimeout(() => finishLevel(false), 1500);
             return;
         }
 
-        // Ir para próximo estágio ou fechar venda
+        // Segue para a próxima objeção ou avalia encerramento do nível
         gameState.currentStage++;
         if (gameState.currentStage < level.objections.length) {
             setTimeout(() => {
                 showGameplayStage();
             }, 2000);
         } else {
-            // Fim dos estágios: avaliar se fechou a venda
+            // Verifica condição de vitória final
             setTimeout(() => {
                 const won = gameState.closing >= 70;
                 finishLevel(won);
@@ -442,57 +286,20 @@ function handleChoice(option) {
     }, 1000);
 }
 
-// Auxiliar para injetar balões de chat
-function addChatMessage(sender, text, type) {
-    const chatHistory = document.getElementById('chat-history');
-    const msgDiv = document.createElement('div');
-    msgDiv.className = `msg msg-${type}`;
-    
-    if (type !== 'system') {
-        msgDiv.innerHTML = `<strong>${sender}:</strong> <br>${text}`;
-    } else {
-        msgDiv.innerHTML = `💡 <strong>${sender}:</strong> ${text}`;
-    }
-
-    chatHistory.appendChild(msgDiv);
-    
-    // Auto scroll para o final do chat
-    chatHistory.scrollTop = chatHistory.scrollHeight;
-}
-
-// Atualizar visualmente as barras de Humor e Fechamento
-function updateGameplayBars() {
-    document.getElementById('mood-val').innerText = `${gameState.mood}%`;
-    document.getElementById('mood-bar').style.width = `${gameState.mood}%`;
-
-    document.getElementById('closing-val').innerText = `${gameState.closing}%`;
-    document.getElementById('closing-bar').style.width = `${gameState.closing}%`;
-
-    // Alterar cores baseadas no nível crítico do humor
-    const moodBar = document.getElementById('mood-bar');
-    if (gameState.mood < 30) {
-        moodBar.style.background = '#ef4444'; // Vermelho crítico
-    } else if (gameState.mood < 60) {
-        moodBar.style.background = '#f59e0b'; // Laranja alerta
-    } else {
-        moodBar.style.background = 'linear-gradient(to right, #f59e0b, #10b981)';
-    }
-}
-
-// Finaliza o nível (Vitória ou Derrota)
+// Finaliza a rota (Vitória ou Derrota)
 function finishLevel(isVictory) {
     const level = gameLevels[gameState.currentLevel];
     
     if (isVictory) {
-        // Vitória
+        // Atribui recompensas de XP
         gameState.xp += level.xpReward;
         
-        // Registrar conclusão
+        // Registra conclusão
         if (!gameState.levelsCompleted.includes(level.id)) {
             gameState.levelsCompleted.push(level.id);
         }
 
-        // Desbloquear medalha correspondente
+        // Registra novas conquistas
         const badgeKey = level.successBadge.name.toLowerCase().replace(/ /g, '_');
         let newBadgeUnlocked = false;
         if (!gameState.unlockedBadges.includes(badgeKey)) {
@@ -500,65 +307,15 @@ function finishLevel(isVictory) {
             newBadgeUnlocked = true;
         }
 
-        saveProgress();
+        // Salva os dados localmente
+        saveGameState(gameState);
         updateHeaderStats();
         updateLevelGrid();
 
-        // Mostrar tela de resultados de vitória
+        // Abre tela de vitória
         showResultScreen(true, level, `Parabéns! Você fechou a venda com o ${level.clientName}! Com base nos diferenciais de saudabilidade, sabor e lucro de FYS, a padaria agora tem refrigerantes Heineken na rota principal.`, newBadgeUnlocked);
     } else {
-        // Derrota
+        // Abre tela de derrota
         showResultScreen(false, level, `Infelizmente a negociação falhou. O cliente perdeu a paciência ou não sentiu confiança nos argumentos sobre FYS. Que tal tentar novamente com outra estratégia?`);
     }
-}
-
-// Configura e mostra a tela final de resultados
-function showResultScreen(isVictory, level, message, newBadgeUnlocked = false) {
-    const iconEl = document.getElementById('result-icon');
-    const titleEl = document.getElementById('result-title');
-    const messageEl = document.getElementById('result-message');
-    const xpEl = document.getElementById('result-xp');
-    const performanceEl = document.getElementById('result-performance');
-    const badgeSection = document.getElementById('badge-unlocked-section');
-
-    if (isVictory) {
-        iconEl.innerText = "🎉";
-        titleEl.innerText = "Venda Concluída!";
-        titleEl.style.color = "var(--heineken-neon)";
-        messageEl.innerText = message;
-        xpEl.innerText = `+${level.xpReward} XP`;
-        
-        // Avaliação de performance baseada no fechamento final
-        if (gameState.closing >= 90) {
-            performanceEl.innerText = "Performance Imbatível! 🌟";
-            performanceEl.style.color = "var(--fys-acid)";
-        } else {
-            performanceEl.innerText = "Bom Trabalho! 👍";
-            performanceEl.style.color = "var(--fys-orange)";
-        }
-
-        // Mostrar distintivo desbloqueado
-        if (newBadgeUnlocked && level.successBadge) {
-            badgeSection.style.display = 'flex';
-            document.getElementById('unlocked-badge-name').innerText = level.successBadge.name;
-            document.getElementById('unlocked-badge-desc').innerText = level.successBadge.desc;
-            badgeSection.querySelector('.badge-icon').innerText = level.successBadge.icon;
-        } else {
-            badgeSection.style.display = 'none';
-        }
-        
-        btnNextStep.innerText = "Ver Outras Rotas";
-    } else {
-        iconEl.innerText = "😢";
-        titleEl.innerText = "Negociação Mal Sucedida";
-        titleEl.style.color = "#ef4444";
-        messageEl.innerText = message;
-        xpEl.innerText = "+0 XP";
-        performanceEl.innerText = "Tente Novamente!";
-        performanceEl.style.color = "#9ca3af";
-        badgeSection.style.display = 'none';
-        btnNextStep.innerText = "Refazer Nível";
-    }
-
-    showScreen('result');
 }

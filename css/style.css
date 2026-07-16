@@ -1,32 +1,7 @@
-/* CSS PRINCIPAL - FYS BAKERY CONQUEST */
+/* STYLE.CSS - FYS BAKERY CONQUEST */
+/* Define as regras estruturais, componentes e layouts responsivos */
 
-/* 1. RESET E VARIÁVEIS DE DESIGN */
-:root {
-    --bg-dark: #070a12;
-    --bg-card: rgba(18, 25, 41, 0.6);
-    --bg-card-border: rgba(255, 255, 255, 0.08);
-    --text-main: #f3f4f6;
-    --text-muted: #9ca3af;
-    
-    /* Branding Colors */
-    --heineken-green: #008248;
-    --heineken-neon: #10b981;
-    --fys-orange: #ff6b00;
-    --fys-blue: #0052ff;
-    --fys-acid: #d4ff00;
-    
-    /* Gradient backgrounds */
-    --gradient-fys: linear-gradient(135deg, var(--fys-orange) 0%, var(--fys-blue) 100%);
-    --gradient-glass: rgba(255, 255, 255, 0.04);
-    --gradient-glow: 0 0 20px rgba(0, 82, 255, 0.25);
-    
-    /* Font sizes & families */
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/* 1. RESET E CONFIGURAÇÕES DO BODY */
 * {
     margin: 0;
     padding: 0;
@@ -43,7 +18,7 @@ body {
     position: relative;
 }
 
-/* Fundo decorativo luminoso */
+/* Fundo decorativo com efeitos de brilho gradiente */
 body::before {
     content: '';
     position: absolute;
@@ -68,7 +43,7 @@ body::after {
     pointer-events: none;
 }
 
-/* 2. LAYOUT GERAL */
+/* 2. ESTRUTURA GERAL DA SPA */
 .app-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -79,7 +54,7 @@ body::after {
     justify-content: space-between;
 }
 
-/* NAVBAR / HEADER */
+/* CABEÇALHO / NAVBAR */
 .app-header {
     display: flex;
     justify-content: space-between;
@@ -141,7 +116,7 @@ body::after {
     transform: translateY(-2px);
 }
 
-/* MAIN CONTENT SCREENS */
+/* ÁREA DE CONTEÚDO E TELAS */
 .app-main {
     flex-grow: 1;
     display: flex;
@@ -152,14 +127,13 @@ body::after {
 .screen {
     display: none;
     width: 100%;
-    animation: fadeIn 0.4s ease-in-out forwards;
 }
 
 .screen.active {
     display: block;
 }
 
-/* 3. COMPONENTES E BOTÕES */
+/* 3. BOTÕES E COMPONENTES COMUNS */
 .btn {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -211,7 +185,7 @@ body::after {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* GLASS EFFECT CARD */
+/* EFEITOS DE VIDRO (GLASSMORPHISM) */
 .card-glass {
     background: var(--bg-card);
     border: 1px solid var(--bg-card-border);
@@ -220,7 +194,7 @@ body::after {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* 4. TELA 1: WELCOME SCREEN */
+/* 4. TELA INICIAL (WELCOME) */
 .welcome-card {
     background: var(--bg-card);
     border: 1px solid var(--bg-card-border);
@@ -256,7 +230,6 @@ body::after {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 15px;
-    animation: pulseGlow 3s infinite ease-in-out;
 }
 
 .welcome-card h1 {
@@ -312,7 +285,7 @@ body::after {
     color: var(--text-muted);
 }
 
-/* 5. TELA 2: LEVEL SELECT */
+/* 5. TELA DE SELEÇÃO DE ROTAS */
 .section-title {
     text-align: center;
     margin-bottom: 40px;
@@ -421,7 +394,7 @@ body::after {
 .text-medium { color: #f59e0b; }
 .text-hard { color: #ef4444; }
 
-/* Locked Level styling */
+/* Níveis Bloqueados */
 .level-card.locked {
     opacity: 0.55;
     background: rgba(18, 25, 41, 0.4);
@@ -440,7 +413,7 @@ body::after {
     margin: 0 auto;
 }
 
-/* 6. TELA 3: GAMEPLAY */
+/* 6. PAINEL DE GAMEPLAY */
 .gameplay-layout {
     display: grid;
     grid-template-columns: 350px 1fr;
@@ -450,7 +423,7 @@ body::after {
     margin: 0 auto;
 }
 
-/* Painel Lateral do Cliente */
+/* Informações do Cliente à Esquerda */
 .client-panel {
     padding: 25px;
     display: flex;
@@ -489,7 +462,7 @@ body::after {
     color: var(--text-muted);
 }
 
-/* Métricas / Barras de progresso */
+/* Barras de Progresso */
 .metrics-container {
     display: flex;
     flex-direction: column;
@@ -554,7 +527,7 @@ body::after {
     color: var(--text-muted);
 }
 
-/* Painel de Chat */
+/* Painel de Chat à Direita */
 .chat-panel {
     display: flex;
     flex-direction: column;
@@ -572,13 +545,12 @@ body::after {
     border-bottom: 1px solid var(--bg-card-border);
 }
 
-/* Estilos de balões de mensagens */
+/* Balões de Mensagem */
 .msg {
     max-width: 80%;
     padding: 12px 18px;
     border-radius: 16px;
     font-size: 0.92rem;
-    animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
 }
 
 .msg-client {
@@ -608,7 +580,7 @@ body::after {
     border-radius: 20px;
 }
 
-/* Painel de Escolhas */
+/* Painel das Escolhas do Jogador */
 .choices-panel {
     padding: 20px 25px;
     background: rgba(0, 0, 0, 0.2);
@@ -650,7 +622,7 @@ body::after {
     transform: translateX(4px);
 }
 
-/* 7. TELA 4: RESULT SCREEN */
+/* 7. TELA DE RESULTADOS */
 .result-card {
     max-width: 550px;
     margin: 0 auto;
@@ -707,6 +679,7 @@ body::after {
 .text-highlight { color: var(--fys-acid); }
 .text-fys { color: var(--fys-orange); }
 
+/* Card de Distintivos */
 .badge-unlocked-card {
     display: flex;
     align-items: center;
@@ -766,39 +739,7 @@ body::after {
     margin-top: 25px;
 }
 
-/* 9. KEYFRAMES & ANIMATIONS */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes popIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.92) translateY(8px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-@keyframes pulseGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 15px rgba(255, 107, 0, 0.3));
-    }
-    50% {
-        filter: drop-shadow(0 0 25px rgba(0, 82, 255, 0.5));
-    }
-}
-
-/* Responsive adjustment */
+/* 9. RESPONSIVIDADE E DISPOSITIVOS MÓVEIS */
 @media (max-width: 900px) {
     .gameplay-layout {
         grid-template-columns: 1fr;

@@ -1,0 +1,48 @@
+/* ANIMATIONS.CSS - FYS BAKERY CONQUEST */
+/* Define as animações e efeitos de transição visual do simulador */
+
+/* Animação de Entrada Gradual (Telas) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.anim-fade-in {
+    animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+/* Animação dos Balões de Diálogo */
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.92) translateY(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.anim-pop-in {
+    animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+/* Animação de Pulsação de Brilho no Logo FYS */
+@keyframes pulseGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 15px rgba(255, 107, 0, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 25px rgba(0, 82, 255, 0.5));
+    }
+}
+
+.anim-pulse-glow {
+    animation: pulseGlow 3s infinite ease-in-out;
+}

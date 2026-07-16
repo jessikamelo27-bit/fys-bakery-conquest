@@ -1,74 +1,127 @@
-# FYS Bakery Conquest 🎮🥖
-> **O Simulador de Vendas Gamificado para o Canal Off-Premise (Padarias) do Grupo HEINEKEN.**
+# 🥐 FYS Bakery Conquest
 
-Este repositório contém o projeto final desenvolvido para o desafio **"Copiloto de Vendas com IA para Atendimento ao Cliente"** da DIO.
-
-O **FYS Bakery Conquest** é um protótipo interativo rodando 100% no navegador (Single Page Application) que gamifica o treinamento de promotores e vendedores do grupo Heineken para ativarem a marca de refrigerantes **FYS** em padarias brasileiras.
+Uma aplicação web interativa e gamificada projetada para treinar vendedores e promotores do grupo Heineken a contornar objeções e ativar a marca de refrigerantes **FYS** no canal de padarias do Brasil.
 
 ---
 
-## 🎯 O Desafio & A Dor de Mercado
-No mercado de bebidas, existe um comportamento comum entre a força de vendas: **os vendedores priorizam a rota de bares.** Isso ocorre porque os bares vendem bebidas alcoólicas (cervejas, chopes), que possuem alto valor, giro orgânico simples e comissões robustas.
+## 🎮 Demo
 
-Com isso, o **canal de padarias (que soma quase 80 mil estabelecimentos no Brasil)** acaba sendo negligenciado. Para entrar e vencer nesse canal, o vendedor precisa de treinamento dinâmico, abordagens personalizadas e argumentos sólidos sobre:
-*   A qualidade e origem de FYS (fabricado pelo grupo HEINEKEN).
-*   Os benefícios de sabor e saúde (30% menos açúcar, sem corantes artificiais).
-*   A excelente rentabilidade comercial (margem de lucro superior ao líder de mercado).
+Acesse a versão online e jogue diretamente no seu navegador clicando no botão abaixo:
+
+[![Jogar Agora](https://img.shields.io/badge/🎮-JOGAR%20AGORA-FF6B00?style=for-the-badge&logoWidth=40)](https://jessikamelo27-bit.github.io/fys-bakery-conquest/)
 
 ---
 
-## 💡 A Solução: RPG de Vendas
-O **FYS Bakery Conquest** transforma o treinamento corporativo em um jogo de simulação de diálogos. O vendedor viaja por uma rota de padarias com perfis reais e enfrente objeções dos donos:
+## 📷 Screenshots & GIFs
 
-1.  **Seu Manoel (Padaria do Bairro):** Conservador, focado nas marcas líderes tradicionais. Suas objeções envolvem a falta de espaço nas geladeiras e o medo de o produto ficar "encalhado".
-2.  **Dona Neuza (Panificadora Gourmet):** Focada em saúde e finanças de alto padrão. Ela questiona o visual das embalagens e se seus clientes (que preferem água/suco) comprariam refrigerante.
-3.  **Rede Pão de Ouro (Corporativo - Key Account):** Desbloqueado após vencer os níveis 1 e 2. Simula uma negociação de alta escala baseada em combos locais.
+> [!NOTE]
+> *Salve as capturas de tela e GIFs da sua aplicação rodando dentro das subpastas em `/assets` para que elas carreguem aqui!*
 
----
-
-## 🚀 Como Executar o Protótipo
-O simulador foi construído em **HTML5, CSS3 (Vanilla) e JavaScript puro**, sem necessidade de instalação de dependências ou servidores complexos.
-
-1.  Baixe ou clone este repositório.
-2.  Navegue até a pasta `fys-bakery-conquest/`.
-3.  Dê um duplo clique no arquivo `index.html` para abri-lo diretamente em qualquer navegador moderno.
-4.  Jogue, teste diferentes abordagens e conquiste os distintivos!
+| 📷 Tela Inicial | 📷 Gameplay |
+| :---: | :---: |
+| ![Tela Inicial](assets/img/screenshot-home.png) | ![Gameplay](assets/img/screenshot-gameplay.png) |
+| **📷 Vitória** | **📷 GIF de Demonstração** |
+| ![Vitória](assets/img/screenshot-victory.png) | ![GIF Demo](assets/gif/demo.gif) |
 
 ---
 
-## 🛠️ Tecnologias Utilizadas & Design System
-Para criar uma experiência premium e que se destaque visualmente para os parceiros da Heineken, o design do app segue estas diretrizes:
+## 💡 O Problema
+No setor de distribuição de bebidas, os vendedores de campo tendem a focar prioritariamente em rotas de bares. Isso acontece porque a venda de cervejas e bebidas alcoólicas possui giro rápido e comissões robustas. 
 
-*   **HTML5 Semântico:** Estrutura clara e acessível.
-*   **CSS3 Moderno:**
-    *   **Dark Mode Nativo:** Fundo escuro profundo para dar destaque aos contrastes neon.
-    *   **Paleta de Cores Híbrida:** Mistura o verde institucional da Heineken com o laranja e azul elétrico de FYS.
-    *   **Glassmorphism:** Uso de desfoque de fundo (`backdrop-filter`) e transparências para criar painéis modernos que parecem vidro flutuante.
-    *   **Micro-animações:** Efeitos de pulsação luminosa no logotipo, transições de tela suaves e feedback dinâmico nas barras de métricas de humor.
-*   **JavaScript:** Lógica de controle de estado, cálculo de pontos, validações e persistência de dados local com `localStorage` (o jogo lembra seu XP e conquistas mesmo se fechar a página!).
+Essa preferência acaba negligenciando o canal de **padarias no Brasil, que soma quase 80 mil pontos de venda.** Para abrir espaço neste mercado, o vendedor precisa saber expor o refrigerante FYS, apresentar suas qualidades de sabor e mostrar ao comerciante que a FYS gera maior lucro do que as marcas concorrentes tradicionais.
 
 ---
 
-## 📁 Estrutura de Arquivos do Projeto
+## 🚀 A Solução
+O **FYS Bakery Conquest** é um simulador de vendas em estilo RPG de conversação. O vendedor visita padarias com diferentes perfis e precisa utilizar as melhores táticas de negociação da FYS (como menos açúcar, qualidade do grupo Heineken, testes cegos de sabor e propostas de combos com lanches locais) para contornar objeções dos donos e conquistar espaço nas geladeiras.
+
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/github%20pages-%23121013.svg?style=for-the-badge&logo=github&logoColor=white)
+![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)
+
+*   **Tempo de Desenvolvimento:** 4 horas
+*   **Desenvolvido para:** Desafio de Projeto Final - DIO (Digital Innovation One)
+
+---
+
+## ✨ Funcionalidades
+
+*   ✔ **Sistema de Diálogos & Objeções:** Árvore de decisões comerciais baseada em dados reais da live da FYS.
+*   ✔ **Lógica de Humor e Fechamento:** Barras dinâmicas que reagem imediatamente a cada argumento do vendedor.
+*   ✔ **Persistência de Dados:** Uso de `localStorage` para manter XP e distintivos salvos caso o navegador seja fechado.
+*   ✔ **Interface Responsiva:** Otimizada para celulares de vendedores em campo e desktops de recrutadores.
+*   ✔ **Gamificação:** Desbloqueio de medalhas (badges) exclusivas baseadas em seu desempenho de negociação.
+*   ✔ **Feedback do Copiloto:** Um painel com feedbacks instrutivos que ensinam o vendedor sobre o posicionamento da FYS a cada rodada.
+
+---
+
+## 📁 Estrutura de Diretórios
+A organização do projeto segue a arquitetura modular limpa e profissional:
+
 ```text
-fys-bakery-conquest/
-├── index.html        # Estrutura e navegação Single Page Application (SPA)
-├── style.css         # Estilização premium (Cores Heineken/FYS, Responsividade)
-├── app.js            # Lógica das rotas de vendas, diálogos e dados do jogo
-└── README.md         # Documentação e apresentação da entrega final (este arquivo)
+/
+├── index.html        # Estrutura principal da SPA
+├── LICENSE           # Licença MIT
+├── README.md         # Documentação e portfólio (este arquivo)
+├── css/
+│   ├── variables.css # Definição de cores, fontes e design tokens
+│   ├── animations.css# Transições visuais e keyframes de efeitos
+│   └── style.css     # Estilos de layout estrutural e componentes
+├── js/
+│   ├── storage.js    # Controlador de leitura e gravação no localStorage
+│   ├── game.js       # Banco de dados das rotas e controle de fluxo do jogo
+│   ├── ui.js         # Atualizações do DOM, barras de progresso e chat
+│   └── app.js        # Inicialização do jogo e escuta de eventos de clique
+└── assets/
+    ├── img/          # Capturas de tela (screenshots)
+    ├── gif/          # Demonstração gravada em loop (GIF)
+    ├── icons/        # Logotipos e ícones gráficos
+    └── audio/        # Efeitos sonoros (expansão futura)
 ```
 
 ---
 
-## 🌟 O Que Este Projeto Entrega (Requisitos DIO)
-*   **Desafio Escolhido:** Vendas no canal de padarias e contorno de objeções comerciais (Desafios 3, 5, 6 e 7 da FYS).
-*   **Persona Alvo:** Vendedores e promotores de campo da Heineken.
-*   **Como a IA/Gamificação Ajuda:** Treina a tomada de decisão rápida e fixa os argumentos chave de sabor, saudabilidade e margem de FYS em situações de alta pressão.
-*   **Diferencial Estético:** Interface limpa, responsiva (funciona perfeitamente em telas de celulares dos vendedores) e alinhada ao tom jovem e autêntico de FYS.
+## ▶ Como Executar
+
+### Execução Online
+Basta acessar o link da demonstração:
+👉 **[https://jessikamelo27-bit.github.io/fys-bakery-conquest/](https://jessikamelo27-bit.github.io/fys-bakery-conquest/)**
+
+### Execução Local (Offline)
+1. Clone o repositório em sua máquina:
+   ```bash
+   git clone https://github.com/jessikamelo27-bit/fys-bakery-conquest.git
+   ```
+2. Abra a pasta do projeto.
+3. Dê um duplo clique no arquivo `index.html` para executá-lo diretamente no navegador (não requer servidor local).
+
+---
+
+## 📚 Aprendizados
+
+Durante o desenvolvimento deste desafio, foi possível praticar e consolidar:
+*   **Modularização de Front-end Estático:** Divisão de código CSS e JS mantendo a compatibilidade offline (sem gerar bloqueios de CORS que impediriam a abertura direta do arquivo `index.html` localmente).
+*   **Técnicas de Gamificação (EdTech):** Aplicação de mecânicas de jogos (pontos de experiência, conquistas, barras de humor do cliente) para fixação de conteúdos de treinamento corporativo.
+*   **Lógica de Árvore de Decisão:** Modelagem de dados de conversação interativa que respondem de forma condicional à escolha do usuário.
 
 ---
 
 ## 🔮 Melhorias Futuras
-1.  **Integração com LLM (Gemini/OpenAI):** Adicionar um modo "Livre" onde o vendedor digita a mensagem por extenso e a IA avalia semanticamente o nível do argumento em tempo real usando processamento de linguagem natural.
-2.  **Ranking da Força de Vendas:** Criar uma tabela de classificação online para engajar os vendedores regionais a competirem entre si pelo maior XP.
-3.  **Módulo de Inteligência de Campo:** Permitir que o vendedor envie fotos das geladeiras reais para o copiloto de IA analisar a exposição física e dar feedback corretivo.
+
+Se eu retornar a este projeto no futuro, pretendo implementar:
+*   🏆 **Ranking de Vendedores:** Placar de líderes online conectado a um banco de dados na nuvem para engajar times comerciais.
+*   💾 **Nuvem Save:** Salvamento integrado com contas corporativas.
+*   🎵 **Efeitos de Áudio:** Músicas de fundo animadas e feedbacks sonoros para acertos e erros de negociações.
+*   📱 **Análise de PDV por Foto:** Integração de IA de visão computacional para analisar fotos da geladeira tiradas pelo vendedor.
+
+---
+
+## 📄 Licença
+Este projeto é distribuído sob os termos da licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
